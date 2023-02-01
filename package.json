@@ -1,6 +1,7 @@
 {
   "name": "osser",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
