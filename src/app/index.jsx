@@ -1,14 +1,18 @@
 import { useRef } from 'react';
+import { nanoid } from 'nanoid';
 
 import './index.css';
 import { useWebSocket } from '../hooks';
+
+// generate id for client
+const id = nanoid();
 
 const App = () => {
   const wrapperRef = useRef(null);
   // mouse position
   const positionRef = useRef({ x: -9999, y: -9999 });
 
-  useWebSocket();
+  useWebSocket(id);
 
   const handleMouseMove = (e) => {
     if (wrapperRef.current) {
