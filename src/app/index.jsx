@@ -1,32 +1,29 @@
-import { useState } from 'react'
-
-import reactLogo from '~/assets/react.svg'
+import { useRef } from 'react';
 
 import './index.css'
 
 const App = () => {
-  const [count, setCount] = useState(0)
+  const wrapperRef = useRef(null);
+  // mouse position
+  const positionRef = useRef({ x: -9999, y: -9999 });
+
+  const handleMouseMove = e => {
+    if (wrapperRef.current) {
+      const { x, y } = wrapperRef.current.getBoundingClientRect();
+      const nextPosition = { x: e.clientX - x, y: e.clientY - y };
+      // update mouse position
+      positionRef.current = nextPosition;
+      wrapperRef.current.style.setProperty('--x', String(nextPosition.x));
+      wrapperRef.current.style.setProperty('--y', String(nextPosition.y));
+    }
+  };
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/osser-frontend/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>osser</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/app/index.jsx</code> and save to test HMR
-        </p>
-      </div>
-    </div>
+    <div
+      className="wrapper"
+      ref={wrapperRef}
+      onMouseMove={handleMouseMove}
+    />
   )
 }
 
