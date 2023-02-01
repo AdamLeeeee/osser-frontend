@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 
-import './index.css'
+import './index.css';
 
 const App = () => {
   const wrapperRef = useRef(null);
   // mouse position
   const positionRef = useRef({ x: -9999, y: -9999 });
 
-  const handleMouseMove = e => {
+  const handleMouseMove = (e) => {
     if (wrapperRef.current) {
       const { x, y } = wrapperRef.current.getBoundingClientRect();
       const nextPosition = { x: e.clientX - x, y: e.clientY - y };
@@ -19,12 +19,8 @@ const App = () => {
   };
 
   return (
-    <div
-      className="wrapper"
-      ref={wrapperRef}
-      onMouseMove={handleMouseMove}
-    />
-  )
-}
+    <div className='wrapper' ref={wrapperRef} onMouseMove={handleMouseMove} />
+  );
+};
 
-export default App
+export default App;

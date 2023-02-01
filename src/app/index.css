@@ -12,11 +12,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: radial-gradient(
-    ellipse at bottom,
-    #532cad 0%,
-    #020112 50%
-  );
+  background-image: radial-gradient(ellipse at bottom, #532cad 0%, #020112 50%);
   opacity: 0.4;
   filter: blur(20px);
 }
@@ -33,7 +29,7 @@
   background-color: #fff;
   mix-blend-mode: difference;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .wrapper:hover::after {
