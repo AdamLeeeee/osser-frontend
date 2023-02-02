@@ -1,21 +1,10 @@
 import './index.css';
 
-const Mouse = (props) => {
-  const { position } = props;
+const Mouse = ({ position }) => {
+  const { userId, x, y } = position;
 
   return (
-    <div
-      className='mouse-wrapper'
-      id={position.userId}
-      style={{
-        position: 'absolute',
-        top: `${position.y - 8}px`,
-        left: `${position.x - 8}px`,
-        width: '16px',
-        height: '16px',
-        borderRadius: '50%'
-      }}
-    />
+    <div className='mouse-wrapper' id={userId} style={{ left: x, top: y }} />
   );
 };
 
