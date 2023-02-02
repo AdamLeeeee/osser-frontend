@@ -12,7 +12,7 @@ const App = () => {
   // mouse position
   const positionRef = useRef({ x: -9999, y: -9999 });
 
-  useWebSocket(id);
+  const { sendMessage } = useWebSocket(id);
 
   const handleMouseMove = (e) => {
     if (wrapperRef.current) {
@@ -22,6 +22,12 @@ const App = () => {
       positionRef.current = nextPosition;
       wrapperRef.current.style.setProperty('--x', String(nextPosition.x));
       wrapperRef.current.style.setProperty('--y', String(nextPosition.y));
+      const message = {
+        userId: id,
+        x: positionRef.current.x,
+        y: positionRef.current.y
+      };
+      sendMessage(JSON.stringify(message));
     }
   };
 
