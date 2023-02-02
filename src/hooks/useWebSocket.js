@@ -8,7 +8,6 @@ export const useWebSocket = (id) => {
     const _socket = new WebSocket(`ws://localhost:8080/${id}`);
     _socket.addEventListener('message', (event) => {
       setMice(event.data);
-      // eslint-disable-next-line no-console
     });
 
     socket.current = _socket;

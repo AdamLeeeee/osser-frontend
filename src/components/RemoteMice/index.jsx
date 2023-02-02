@@ -1,6 +1,4 @@
-// eslint-disable-next-line react/prop-types
 const SingleRemoteMouse = ({ position }) => {
-  // eslint-disable-next-line react/prop-types
   const { userId, x, y } = position;
   return (
     <button

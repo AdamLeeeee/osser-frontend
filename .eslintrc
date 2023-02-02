@@ -27,6 +27,7 @@
     "no-console": "warn",
     "react/self-closing-comp": "error",
     "arrow-body-style": "error",
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "react/prop-types": "off"
   }
 }
