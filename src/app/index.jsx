@@ -2,8 +2,8 @@ import { useRef } from 'react';
 import { nanoid } from 'nanoid';
 
 import './index.css';
+import Mouse from '../components/Mouse';
 import { useWebSocket } from '../hooks';
-import RemoteMice from '~/components/RemoteMice/index.jsx';
 
 // generate id for client
 const id = nanoid();
@@ -13,7 +13,7 @@ const App = () => {
   // mouse position
   const positionRef = useRef({ x: -9999, y: -9999 });
 
-  const { sendMessage, mice } = useWebSocket(id);
+  const { sendMessage, list } = useWebSocket(id);
 
   const handleMouseMove = (e) => {
     if (wrapperRef.current) {
@@ -31,9 +31,12 @@ const App = () => {
       sendMessage(message);
     }
   };
+
   return (
     <div className='wrapper' ref={wrapperRef} onMouseMove={handleMouseMove}>
-      <RemoteMice positionList={mice} />
+      {list.map((item) => (
+        <Mouse position={item} key={item.userId} />
+      ))}
     </div>
   );
 };

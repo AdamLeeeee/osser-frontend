@@ -1,21 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 
+// websocket readyState open constants
+const OPEN = 1;
+
 export const useWebSocket = (id) => {
   const socket = useRef(null);
-  const [mice, setMice] = useState('[]');
+  const [list, setList] = useState([]);
 
   useEffect(() => {
     const _socket = new WebSocket(`ws://localhost:8080/${id}`);
     _socket.addEventListener('message', (event) => {
-      setMice(event.data);
+      setList(JSON.parse(event.data));
     });
 
     socket.current = _socket;
   }, []);
 
   const sendMessage = (position) => {
-    socket.current.send(JSON.stringify(position));
+    socket.current?.readyState === OPEN &&
+      socket.current.send(JSON.stringify(position));
   };
 
-  return { socket, sendMessage, mice };
+  return { sendMessage, list };
 };
