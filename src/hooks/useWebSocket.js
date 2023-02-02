@@ -14,6 +14,11 @@ export const useWebSocket = (id) => {
     });
 
     socket.current = _socket;
+
+    // cleanup socket on unmount
+    return () => {
+      socket.current?.close();
+    };
   }, []);
 
   const sendMessage = (position) => {
