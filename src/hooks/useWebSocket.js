@@ -1,16 +1,22 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useWebSocket = (id) => {
-  const socket = useRef(new WebSocket(`ws://localhost:8080/${id}`));
+  const socket = useRef(null);
+  const [mice, setMice] = useState('[]');
 
-  socket.current.addEventListener('message', (event) => {
-    // eslint-disable-next-line no-console
-    console.log('Message from server ', event.data);
-  });
+  useEffect(() => {
+    const _socket = new WebSocket(`ws://localhost:8080/${id}`);
+    _socket.addEventListener('message', (event) => {
+      setMice(event.data);
+      // eslint-disable-next-line no-console
+    });
+
+    socket.current = _socket;
+  }, []);
 
   const sendMessage = (position) => {
     socket.current.send(JSON.stringify(position));
   };
 
-  return { socket, sendMessage };
+  return { socket, sendMessage, mice };
 };
