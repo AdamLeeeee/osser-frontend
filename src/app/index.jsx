@@ -27,7 +27,7 @@ const App = () => {
         x: positionRef.current.x,
         y: positionRef.current.y
       };
-      sendMessage(JSON.stringify(message));
+      sendMessage(message);
     }
   };
 

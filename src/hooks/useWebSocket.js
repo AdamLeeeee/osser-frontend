@@ -9,10 +9,8 @@ export const useWebSocket = (id) => {
   });
 
   const sendMessage = (position) => {
-    socket.current.send(position);
+    socket.current.send(JSON.stringify(position));
   };
-
-  // TODO: 关闭页面时，关闭 socket
 
   return { socket, sendMessage };
 };
